@@ -15,7 +15,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
 	@Override
 	public int addProduct(Product p) throws PersistenceException {
 		int id = 0;
-		String SQL = "insert into products(id, name, price, category, count) values (1, ?, ?, ?, ?)";
+		String SQL = "insert into products(id, name, price, category, count) values (0, ?, ?, ?, ?)";
 		Connection con = null;
 		try {
 			con = DbUtil.getConnection();

@@ -85,6 +85,38 @@ Java Enterprise Edition
 		executeQuery() ==> SELECT
 		executeUpdate() ==> INSERT, DELETE OR update
 =======================================================================
+	JSE: Java Std Edition ==> Standalone application
+
+	Java Enterprise Edition
+	-----------------------
+		a) Web Application
+		b) Distributed applications
+		Applications of large scale
+
+	Servlet is a technology to write server side java program
+
+	Old Version: < Servlet version 2.5 
+	web.xml
+	<servlet>
+		<servlet-name>login</serlvet-name>
+		<serlvet-class>com.visa.prj.web.LoginServlet</serlvet-class>
+	</servlet>
+	<serlvet-mapping>
+			<servlet-name>login</serlvet-name>
+			<url-pattern>/loginc</url-pattern>
+	</servlet-mapping>
 
 
 
+	@WebServlet("/login")
+	public class LoginServlet extends HttpServlet {
+
+		public void doGet(HttpServletRequest req, HttpServletResponse res) {
+
+		}
+		public void doPost(HttpServletRequest req, HttpServletResponse res) {
+		
+		}
+	}
+
+goals=> jetty:run

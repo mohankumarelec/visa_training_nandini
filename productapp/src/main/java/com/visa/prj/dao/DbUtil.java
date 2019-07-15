@@ -18,11 +18,11 @@ public class DbUtil {
 		}
 	}
 	
-	public Connection getConnection() throws SQLException {
+	public static Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(URL, USER, PWD);
 	}
 	
-	public void closeConnection(Connection con) {
+	public static void closeConnection(Connection con) {
 		if(con != null) {
 			try {
 				con.close();

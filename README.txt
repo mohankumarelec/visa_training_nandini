@@ -73,6 +73,18 @@ Java Enterprise Edition
 		4) ResultSet
 			cursor to retreived results of "SELECT statement"
 
-			
+		
+		mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost';
+		==========
 
-	
+		mysql> CREATE USER 'visa'@'localhost' IDENTIFED BY 'root';
+
+		mysql> GRANT ALL PRIVILEGES ON *.* TO 'visa'@'localhost';
+		================
+
+		executeQuery() ==> SELECT
+		executeUpdate() ==> INSERT, DELETE OR update
+=======================================================================
+
+
+

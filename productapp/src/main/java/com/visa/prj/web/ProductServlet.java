@@ -21,7 +21,17 @@ public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter(); // opens a character stream to client-Browser
+		ProductDao productDao = new ProductDaoJdbcImpl(); // use factory to get DAO instance
+		try {
+			List<Product> prds = productDao.getProducts();
+			request.setAttribute("products", prds);
+			//server side redirection
+			request.getRequestDispatcher("products.jsp").forward(request, response);
+		} catch (FetchException e) {
+			e.printStackTrace();
+		}
+		
+		/*PrintWriter out = response.getWriter(); // opens a character stream to client-Browser
 		//ServletOutputStream out = response.getOutputStream(); // opens byte stream to client
 		response.setContentType("text/html"); // MIME type 
 		out.print("<html><body>");
@@ -43,7 +53,7 @@ public class ProductServlet extends HttpServlet {
 			e.printStackTrace();
 			out.println(e.getMessage());
 		}
-		out.print("</table></body></html>");
+		out.print("</table></body></html>");*/
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -120,3 +120,83 @@ Java Enterprise Edition
 	}
 
 goals=> jetty:run
+
+https://github.com/BanuPrakash/visa_frameworks
+
+==========
+
+Day 2:
+
+	void service(ServletRequest req, ServletResponse res);
+					|
+					v
+	void service(HttpServletRequest req, HttpServletResponse res);
+					|
+					v
+	void doGet(HttpServletRequest req, HttpServletResponse res);
+	void doPost(HttpServletRequest req, HttpServletResponse res);
+	================
+
+	JSP ==> Java Server Pages
+	HTML ==> Static
+	Servlet ==> Dynamic content [ Good for Application Logic]
+	JSP ==> Static + Dynamic [ Good for Presentation]
+
+	---
+
+	Scriptlets:
+		<%
+			Java statements
+		%>
+	Expression:
+		<%= variable %>
+		way to send output to browser
+		equivalent to :
+
+		out.print(variable);
+	Directives:
+		<%@ %>
+			page
+				import
+				language
+				content-type
+			taglib
+	============================================
+	JSP implicit objects:
+		out ==> JspWriter	extends PrintWriter
+		request ==> HttpServletRequest
+		response ==> HttpServletResponse
+		application ==> ServletContext
+		session ==> HttpSession
+		pageContext ==> PageContext
+		config ==> ServletConfig
+	=============
+
+	HTTP protocol is a stateless protocol, it doesn't track the
+	converstational state of client
+
+	HttpSession API can be used to track converstional state of client ==> Session Tracking
+
+	Methods of HttpSession:
+
+		HttpSession ses = request.getSession();
+
+					// create a session if it doesn't exist
+					// if it exists give a ref to it
+					request.getSession(true);
+
+					// return reference to existing session.
+					// won't create a new session
+					request.getSession(false);
+		void invalidate() ; // terminate the session => logout
+		void setMaxInactiveInterval(seconds); // 20 min default
+
+		void setAttribute(String key, Object val);
+		Object getAttribute(String key);
+		void removeAttribute(String key);
+
+
+
+
+
+

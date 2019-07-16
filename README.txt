@@ -222,7 +222,7 @@ Day 2:
 		get product using the id
 		add selected products into cart
 		redireect to "cart.jsp"
-			
+====================
 
 
 

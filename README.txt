@@ -194,6 +194,35 @@ Day 2:
 		void setAttribute(String key, Object val);
 		Object getAttribute(String key);
 		void removeAttribute(String key);
+==================================================
+	Steps:
+	->localhost:8080
+	-> opens index.html
+	in "index.html" i click "Login" takes you to "login.html"
+
+	login.html:
+		user enters email and pwd and clicks on "login button"
+		action="LoginServlet" method="post"
+	LoginServlet doPost():
+		we create a HttpSession
+		in session store "user", email
+						  "cart", empty arraylist
+		redirect to "index.html"
+	in "index.html"
+		click "products" ==> ProductServlet doGet()
+		in doGet() we fetch products from DB and store
+			it as "products" key in request scope
+			do server side redirecction to "products.jsp"
+	in "products.jsp"
+		we create a form on submit it sends selected "items" to
+		CartServlet doPost()
+	in CartServlet doPost():
+		get "cart" from session
+		read "items" selected checkboxes
+		get product using the id
+		add selected products into cart
+		redireect to "cart.jsp"
+			
 
 
 

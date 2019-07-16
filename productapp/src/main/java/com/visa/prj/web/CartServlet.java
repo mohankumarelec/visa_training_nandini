@@ -34,7 +34,7 @@ public class CartServlet extends HttpServlet {
 					products.add(pr);
 				}
 				ses.setAttribute("cart", products);
-//				response.sendRedirect("products");
+				response.sendRedirect("cart.jsp");
 			} catch (FetchException e) {
 				e.printStackTrace();
 			}

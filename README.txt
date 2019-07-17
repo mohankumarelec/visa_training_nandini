@@ -221,10 +221,92 @@ Day 2:
 		read "items" selected checkboxes
 		get product using the id
 		add selected products into cart
-		redireect to "cart.jsp"
+		redirect to "cart.jsp"
+================================
+Day 3:
+-----
+	To read HTML form fields or Query Parameter:
+	
+	http:server.com?name=Smith&age=25
+
+	String getParameter("nameOfParameter");
+	String[] getParameterValues("nameOfParameter");
+
+	Redirect:
+		a) Client Side Redirection
+			response.sendRedirect("page");
+			Here traffic between client and server happens twice.
+			We can't use this to carry info from one resource to another
+		b) Server Side Redirection
+			MultiStage processing of Data
+			Within Application:
+			request.getRequestDispacther("resource").forward(request,response)
+
+			Between Application:
+			servletContext..getRequestDispacther("resource").forward(request,response)
+	--------------------
+	Filter --> interceptors
+				Security, Profile, Encrpty-Decrypt
+	---------------------
+
+	ServletContext
+		--> can be used to share information between clients and resources
+		${applicationScope}
+	HttpSession in JSP ${sessionScope}
+	----------------	
+
+	JSP, Servlet, Filter executes based on client request mapped with URL
+
+	Listener gets executed based on events happening within a engine
+
+		ServletContextListener
+		HttpSessonListener
+		HttpSessionBindingListener
+		HttpServletRequestListener
+		...
+
+====================
+	Servlet Lifecylce
+		init()
+			service() ==> doGet(), doPost(),...
+		destroy()
 ====================
 
+	Spring Framework and JPA framework
+	----------------------------------
 
+	Spring Framework:
+		* It's a lightweight application framework which provides a
+		container for implementing Inversion Of Control (DI)
+			As on now the flow:
+			Servlet --> Service --> Dao --> Connects to DB
+			What Spring brings:
+			Dependency Injection (DI --> IoC)
+			Servlet <-- Service <-- Dao <--  DB Connection
+		* Spring manages the lifycycle of objects
+		* Spring focuses on the "plumbing" of enterprise applications so that teams can focus on application-level business logic, without unnecessary ties to specific deployment environments.
+
+	=========
+	Spring manages lifecyle of objects whose class has one of these
+	annotations:
+	@Component
+	@Repository
+	@Service
+	@Controller
+	@RestController
+	@Configuration
+
+
+	@Repository
+	public class ProductDaoJdbcImpl implements ProductDao {
+
+	}
+
+	@Service
+	public class OrderService {
+		@Autowired
+		private ProductDao productDao;
+	}
 
 
 

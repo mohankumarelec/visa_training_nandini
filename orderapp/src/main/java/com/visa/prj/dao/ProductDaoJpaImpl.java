@@ -2,25 +2,45 @@ package com.visa.prj.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Repository;
 
 import com.visa.prj.entity.Product;
 @Repository
 public class ProductDaoJpaImpl implements ProductDao {
-
+	@PersistenceContext
+	private EntityManager em;
+	
+	
 	@Override
 	public void addProduct(Product p) {
-		System.out.println("Product added!!!");
+		em.persist(p);
 	}
 
 	@Override
 	public List<Product> getProducts() {
-		return null;
+		String jpql = "from Product";
+		TypedQuery<Product> query = em.createQuery(jpql, Product.class);
+		return query.getResultList();
 	}
 
 	@Override
 	public Product getProduct(int id) {
-		return null;
+		return em.find(Product.class, id);
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+

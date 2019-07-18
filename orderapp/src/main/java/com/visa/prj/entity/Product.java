@@ -1,11 +1,22 @@
 package com.visa.prj.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="products")
 public class Product {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	private int id;
 	private String name;
 	private String category;
 	private double price;
 	private int count;
+	
 	public Product() {
 	}
 	public Product(int id, String name, String category, double price, int count) {

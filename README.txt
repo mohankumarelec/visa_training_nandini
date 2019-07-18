@@ -308,6 +308,162 @@ Day 3:
 		private ProductDao productDao;
 	}
 
+	beans.xml
+	---------
+
+		<bean id="productDao" class="com.visa.prj.dao.ProductDaoJpaImpl" />
+
+		<bean id="orderservice" class="com.visa.prj.service.OrderService" autowire="byType" />
+=======================================================================
+
+	ORM Frameworks and JPA [ Java Persistence API]
+
+	Object Relational Mapping frameworks helps in CRUD Operations on RDBMS
+
+	Object <------------> Relational database mapping
+
+	@Table
+	@Column
+
+	JP-QL ==> Java Persistnce Query Language
+
+	SQL 					
+		a) uses table and column names
+		b) not case-sensitive
+		Example:
+			select * from customers
+			select * from customers where first_name ='Raj'
+	JPQL
+		a) uses class and field names
+		b) case-sensitive for class and field names
+			select c from Customer c
+				OR
+				from Customer
+			select c from Custoemr c where c.firstName = 'Raj'
+				OR
+				from Customer c where c.firstName = 'Raj'
+			select firstName from Customer
+		c) Polymorphic
+			from Object
+			from Product
+				if Mobile extends Product
+				if Tv extends Product
+				will fetch data from product table, mobile and tv table
+
+====================================
+
+	DataSource ==> EntityManagerFactory ==> EntityManager [ manages PersistenceContext]
 
 
+	DriverManger --> Establish Connection
+	In an enterprise app we need pool of database connections
+	DataSource is a pool of database connections.
 
+	EntityManagerFactory	
+			picks a connection from pool
+			selects ORM provider
+			and creates PersistenceContext maanged by EntityManager
+
+	 ===========
+	  @Repository
+	 class ProductDaoJpaImpl implements ProductDao {
+	 	///
+	 }
+	 class SomeClass {
+
+	 }
+
+	 @Configuration
+	 class Config {
+	 	@Bean
+	 	public SomeClass doTask() {
+	 		SomeClass obj = new SomeClass(...);
+	 		obj.doTaht();
+	 		obj.doThis();
+	 		return obj;
+	 	}
+	 }
+	
+
+	 @Service
+	 class ORderSErvice {
+	 	@Autowired
+	 	ProductDao productDao;
+	 	@Autowired
+	 	SomeClass clazz;
+	 }
+================================================
+	
+	Transaction --> ATOMIC
+
+		placeOrder(Order o){
+			insert one row in orders table
+			insert n rows in items table
+			UPDATE n rows in products table
+		}
+
+	JDBC --> Autocommit true
+	Spring --> Autocommit false
+
+	Transaction can Deaclarative or programmatic
+
+		Programmatic TX:
+		using JDBC:
+		public void placeOrder(Order o) {
+			Connection con = null;
+			try {
+				con.setAutoCommit(false);
+					SQL1 = "insert into orders ....";
+					SQL2 = "insert into items ....";
+					SQL3 = "update product set ....";
+
+					ps1.executeUpdate(SQL1);
+					for(Item i : items) {
+						ps2.set parameters
+						ps2.executeUpdate(SQL2);
+					}
+
+					for(Product p : items.products) {
+						ps3.set parameters
+						ps3.executeUpdate(SQL3);
+					}
+				con.commit();
+			} catch(SQLException ex) {
+				con.rollback();
+			}
+		}
+
+		using Hibernate:
+		public void placeOrder(Order o) {
+			Session ses = null;
+			try {
+				ses.beginTransaction();
+					
+
+					ses.persist(o);
+					for(Item i : items) {
+						ses.persist(i);
+					}
+
+					for(Product p : items.products) {
+						ses.update(p);
+					}
+				ses.getTrransaction().commit();
+			} catch(SQLException ex) {
+				ses.getTrransaction().rollback();
+			}
+		}
+
+		=======
+
+		Declarative Tx:
+
+		@Transactional
+		placeOrder(Order o){
+			insert one row in orders table
+			insert n rows in items table
+			UPDATE n rows in products table
+		}
+		================================
+
+		

@@ -5,18 +5,28 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * A hotel where users may book stays.
  */
+@Entity
+@Table(name="Hotel")
 public class Hotel implements Serializable {
 
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 3749724822566325009L;
-
+	
+    @Id
+    @Column(name="HOTEL_ID")
 	private Long id;
 
+    @Column(name="hotel_name")
     private String name;
 
     private String address;
@@ -31,6 +41,7 @@ public class Hotel implements Serializable {
 
     private BigDecimal price;
 
+    
     public Long getId() {
         return id;
     }

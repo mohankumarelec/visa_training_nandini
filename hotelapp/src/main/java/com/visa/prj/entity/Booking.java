@@ -5,9 +5,19 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * A Hotel Booking made by a User.
  */
+@Entity
+@Table(name="bookings")
 public class Booking implements Serializable {
 
 	/**
@@ -18,10 +28,16 @@ public class Booking implements Serializable {
 	private static DateFormat dateFormat = DateFormat
 			.getDateInstance(DateFormat.MEDIUM);
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
+	@ManyToOne
+	@JoinColumn(name="user_email")
 	private User user;
 
+	@ManyToOne
+	@JoinColumn(name="hotel_id")
 	private Hotel hotel;
 
 	private Date checkinDate;
